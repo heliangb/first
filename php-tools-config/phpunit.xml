@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         executionOrder="depends,defects"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         convertDeprecationsToExceptions="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         stopOnFailure="false"
+         cacheDirectory="var/cache/phpunit"
+         backupGlobals="false"
+         backupStaticProperties="false"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         verbose="false">
+    
+    <!-- 测试套件 -->
+    <testsuites>
+        <!-- 单元测试 -->
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        
+        <!-- 集成测试 -->
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        
+        <!-- 功能测试 -->
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+        
+        <!-- 端到端测试 -->
+        <testsuite name="E2E">
+            <directory>tests/E2E</directory>
+        </testsuite>
+    </testsuites>
+    
+    <!-- 代码覆盖率 -->
+    <coverage processUncoveredFiles="true"
+              pathCoverage="false"
+              ignoreDeprecatedCodeUnits="true"
+              disableCodeCoverageIgnore="true">
+        <!-- 包含的文件 -->
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        
+        <!-- 排除的文件 -->
+        <exclude>
+            <directory>src/Exceptions</directory>
+            <directory>src/Console</directory>
+            <file>src/bootstrap.php</file>
+        </exclude>
+        
+        <!-- 覆盖率报告 -->
+        <report>
+            <!-- HTML报告 -->
+            <html outputDirectory="coverage/html" lowUpperBound="50" highLowerBound="80"/>
+            
+            <!-- Clover报告 -->
+            <clover outputFile="coverage/clover.xml"/>
+            
+            <!-- Cobertura报告 -->
+            <cobertura outputFile="coverage/cobertura.xml"/>
+            
+            <!-- PHP报告 -->
+            <php outputFile="coverage/coverage.php"/>
+            
+            <!-- 文本报告 -->
+            <text outputFile="coverage/coverage.txt" showUncoveredFiles="false" showOnlySummary="true"/>
+            
+            <!-- XML报告 -->
+            <xml outputDirectory="coverage/xml"/>
+        </report>
+    </coverage>
+    
+    <!-- 日志记录 -->
+    <logging>
+        <!-- JUnit XML -->
+        <junit outputFile="tests/reports/junit.xml"/>
+        
+        <!-- TeamCity -->
+        <teamcity outputFile="tests/reports/teamcity.txt"/>
+        
+        <!-- 测试结果 -->
+        <testdoxHtml outputFile="tests/reports/testdox.html"/>
+        <testdoxText outputFile="tests/reports/testdox.txt"/>
+    </logging>
+    
+    <!-- 全局常量 -->
+    <php>
+        <!-- 应用环境 -->
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_DEBUG" value="true"/>
+        <env name="APP_KEY" value="base64:2fl+Ktvkdphvz+KQfjo6WdQ2QVp1+C5kwAoXdMHuek8="/>
+        
+        <!-- 数据库配置 -->
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+        
+        <!-- 缓存配置 -->
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        
+        <!-- 邮件配置 -->
+        <env name="MAIL_MAILER" value="array"/>
+        
+        <!-- 文件系统 -->
+        <env name="FILESYSTEM_DISK" value="testing"/>
+        
+        <!-- Redis -->
+        <env name="REDIS_HOST" value="127.0.0.1"/>
+        <env name="REDIS_PASSWORD" value="null"/>
+        <env name="REDIS_PORT" value="6379"/>
+        
+        <!-- 测试特定设置 -->
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="DEBUGBAR_ENABLED" value="false"/>
+        
+        <!-- PHP 设置 -->
+        <ini name="memory_limit" value="512M"/>
+        <ini name="error_reporting" value="-1"/>
+        <ini name="log_errors_max_len" value="0"/>
+        <ini name="zend.assertions" value="1"/>
+        <ini name="assert.exception" value="1"/>
+        
+        <!-- 自定义常量 -->
+        <const name="PHPUNIT_RUNNING" value="true"/>
+        
+        <!-- 全局变量 -->
+        <var name="GLOBALS['_composer_autoload_path']" value="vendor/autoload.php"/>
+    </php>
+    
+    <!-- 扩展 -->
+    <extensions>
+        <!-- 并行执行 -->
+        <!-- <extension class="ParaTest\WrapperRunner\ApplicationForWrapperWorker"/> -->
+        
+        <!-- 数据库事务 -->
+        <!-- <extension class="Illuminate\Foundation\Testing\DatabaseTransactions"/> -->
+        
+        <!-- 时间冻结 -->
+        <!-- <extension class="Carbon\PHPUnit\TestCase"/> -->
+    </extensions>
+    
+    <!-- 监听器 -->
+    <listeners>
+        <!-- 数据库重置 -->
+        <!-- <listener class="Tests\DatabaseResetter"/> -->
+        
+        <!-- 缓存清理 -->
+        <!-- <listener class="Tests\CacheCleaner"/> -->
+    </listeners>
+    
+    <!-- 组 -->
+    <groups>
+        <exclude>
+            <group>integration</group>
+            <group>slow</group>
+            <group>external</group>
+            <group>skip</group>
+        </exclude>
+    </groups>
+</phpunit>

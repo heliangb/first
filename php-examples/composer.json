@@ -1,0 +1,209 @@
+{
+    "name": "example/php-project",
+    "description": "PHP项目示例，展示最佳实践和代码规范",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "开发团队",
+            "email": "dev@example.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-tokenizer": "*",
+        "ext-xml": "*",
+        "ext-ctype": "*",
+        "ext-iconv": "*",
+        "laravel/framework": "^10.0",
+        "laravel/sanctum": "^3.0",
+        "laravel/tinker": "^2.8",
+        "guzzlehttp/guzzle": "^7.2",
+        "doctrine/dbal": "^3.6",
+        "monolog/monolog": "^3.0",
+        "psr/log": "^3.0",
+        "psr/http-message": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/container": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "friendsofphp/php-cs-fixer": "^3.21",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-strict-rules": "^1.5",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "vimeo/psalm": "^5.13",
+        "phpmd/phpmd": "^2.13",
+        "squizlabs/php_codesniffer": "^3.7",
+        "roave/security-advisories": "dev-latest",
+        "fakerphp/faker": "^1.21",
+        "laravel/pint": "^1.10",
+        "nunomaduro/collision": "^7.0",
+        "nunomaduro/larastan": "^2.6",
+        "pestphp/pest": "^2.8",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "spatie/laravel-ignition": "^2.0",
+        "mockery/mockery": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Domain\\": "domain/",
+            "Infrastructure\\": "infrastructure/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit"
+        ],
+        "test:unit": [
+            "@php vendor/bin/phpunit --testsuite=Unit"
+        ],
+        "test:feature": [
+            "@php vendor/bin/phpunit --testsuite=Feature"
+        ],
+        "test:integration": [
+            "@php vendor/bin/phpunit --testsuite=Integration"
+        ],
+        "test:coverage": [
+            "@php vendor/bin/phpunit --coverage-html coverage --coverage-clover coverage.xml"
+        ],
+        "test:coverage-text": [
+            "@php vendor/bin/phpunit --coverage-text"
+        ],
+        "pest": [
+            "@php vendor/bin/pest"
+        ],
+        "pest:coverage": [
+            "@php vendor/bin/pest --coverage"
+        ],
+        "cs:check": [
+            "@php vendor/bin/php-cs-fixer fix --dry-run --diff --verbose"
+        ],
+        "cs:fix": [
+            "@php vendor/bin/php-cs-fixer fix --verbose"
+        ],
+        "pint": [
+            "@php vendor/bin/pint"
+        ],
+        "pint:test": [
+            "@php vendor/bin/pint --test"
+        ],
+        "analyse": [
+            "@php vendor/bin/phpstan analyse --memory-limit=2G"
+        ],
+        "analyse:baseline": [
+            "@php vendor/bin/phpstan analyse --generate-baseline"
+        ],
+        "psalm": [
+            "@php vendor/bin/psalm"
+        ],
+        "psalm:baseline": [
+            "@php vendor/bin/psalm --set-baseline=psalm-baseline.xml"
+        ],
+        "phpmd": [
+            "@php vendor/bin/phpmd src text cleancode,codesize,controversial,design,naming,unusedcode"
+        ],
+        "phpcs": [
+            "@php vendor/bin/phpcs src --standard=PSR12"
+        ],
+        "phpcbf": [
+            "@php vendor/bin/phpcbf src --standard=PSR12"
+        ],
+        "security": [
+            "@php artisan security:check"
+        ],
+        "quality": [
+            "@cs:check",
+            "@analyse",
+            "@psalm",
+            "@phpmd",
+            "@test"
+        ],
+        "quality:fix": [
+            "@cs:fix",
+            "@test"
+        ],
+        "ci": [
+            "@composer validate --strict",
+            "@cs:check",
+            "@analyse",
+            "@psalm",
+            "@phpmd",
+            "@test:coverage"
+        ],
+        "docs:generate": [
+            "@php vendor/bin/phpdoc -d src -t docs"
+        ],
+        "fresh": [
+            "@php artisan migrate:fresh --seed"
+        ],
+        "ide-helper": [
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models",
+            "@php artisan ide-helper:meta"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.1"
+        }
+    },
+    "scripts-descriptions": {
+        "test": "运行所有测试",
+        "test:unit": "运行单元测试",
+        "test:feature": "运行功能测试",
+        "test:integration": "运行集成测试",
+        "test:coverage": "运行测试并生成覆盖率报告",
+        "cs:check": "检查代码风格",
+        "cs:fix": "修复代码风格问题",
+        "analyse": "运行静态分析",
+        "psalm": "运行Psalm静态分析",
+        "phpmd": "运行PHP Mess Detector",
+        "quality": "运行所有质量检查",
+        "quality:fix": "修复质量问题",
+        "ci": "运行CI管道检查",
+        "fresh": "重置数据库并填充种子数据"
+    }
+}

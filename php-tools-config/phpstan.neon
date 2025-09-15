@@ -1,0 +1,204 @@
+# PHPStan 配置文件
+# 静态分析工具配置
+
+parameters:
+    # 分析级别 (0-9, 9最严格)
+    level: 8
+    
+    # 要分析的路径
+    paths:
+        - src
+        - tests
+        - config
+        - database
+    
+    # 排除的路径
+    excludePaths:
+        - vendor
+        - storage
+        - bootstrap/cache
+        - node_modules
+        - '*/migrations/*'
+        - '*/seeders/*'
+    
+    # 排除的文件模式
+    excludeFiles:
+        - '*.blade.php'
+        - 'tests/bootstrap.php'
+    
+    # 忽略的错误
+    ignoreErrors:
+        # 忽略测试文件中的某些错误
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+::factory\(\)#'
+        - '#Access to an undefined property [a-zA-Z0-9\\_]+::\$[a-zA-Z0-9_]+#'
+        
+        # 忽略Laravel特定的动态属性
+        - '#Property [a-zA-Z0-9\\_]+::\$[a-zA-Z0-9_]+ \(array\) does not accept#'
+        
+        # 忽略Eloquent模型的动态方法
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Builder#'
+        - '#Method [a-zA-Z0-9\\_]+::[a-zA-Z0-9_]+ invoked with [0-9]+ parameters?, [0-9]+ required#'
+    
+    # 报告未匹配的忽略错误
+    reportUnmatchedIgnoredErrors: false
+    
+    # 检查函数参数
+    checkFunctionArgumentTypes: true
+    
+    # 检查缺失的迭代值类型
+    checkMissingIterableValueType: false
+    
+    # 检查参数的可变性
+    checkArgumentsPassedByReference: true
+    
+    # 检查可能为null的返回值
+    checkMaybeUndefinedVariables: true
+    
+    # 检查过于宽泛的catch
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true
+    
+    # 检查缺失的返回类型
+    checkMissingCallableSignature: true
+    
+    # 检查联合类型
+    checkUnionTypes: true
+    
+    # 检查显式混合类型
+    checkExplicitMixed: true
+    
+    # 检查函数名称大小写
+    checkFunctionNameCase: true
+    
+    # 检查内部类的大小写
+    checkInternalClassCaseSensitivity: true
+    
+    # 动态常量获取
+    dynamicConstantNames:
+        - APP_DEBUG
+        - APP_ENV
+        - DB_CONNECTION
+    
+    # 类型别名
+    typeAliases:
+        UserId: 'int<1, max>'
+        Email: 'non-empty-string'
+        JsonResponse: 'array<string, mixed>'
+    
+    # 全局常量
+    constants:
+        APP_DEBUG: true
+        APP_ENV: 'testing'
+    
+    # 早期终止
+    earlyTerminatingMethodCalls:
+        Illuminate\Http\Response:
+            - json
+            - redirect
+        Illuminate\Http\RedirectResponse:
+            - with
+            - withErrors
+    
+    # 早期终止函数调用
+    earlyTerminatingFunctionCalls:
+        - abort
+        - dd
+        - die
+        - exit
+        - redirect
+        - response
+    
+    # 通用对象类型
+    universalObjectCratesClasses:
+        - stdClass
+        - SimpleXMLElement
+    
+    # 自定义规则
+    customRulesetUsed: false
+    
+    # 内存限制
+    memoryLimitFile: .phpstan-memory-limit
+    
+    # 并行处理
+    parallel:
+        jobSize: 20
+        maximumNumberOfProcesses: 32
+        minimumNumberOfJobsPerProcess: 2
+    
+    # 临时文件
+    tmpDir: var/cache/phpstan
+    
+    # 结果缓存
+    resultCachePath: var/cache/phpstan/resultCache.php
+    
+    # 污点分析
+    taintAnalysis:
+        enabled: false
+    
+    # 死代码检测
+    deadCode:
+        enabled: false
+    
+    # 未使用的私有成员
+    unusedPrivates:
+        enabled: false
+    
+    # 严格规则
+    strictRules:
+        allRules: false
+        booleansInConditions: true
+        uselessCast: true
+        requireParentConstructorCall: true
+        disallowedLooseComparison: true
+        booleansInConditions: true
+        numericOperandsInArithmeticOperators: true
+        strictCalls: true
+        switchConditionsMatchingType: true
+        noVariableVariables: false
+    
+# 包含其他配置文件
+includes:
+    # Laravel 扩展
+    # - vendor/nunomaduro/larastan/extension.neon
+    
+    # PHPUnit 扩展
+    # - vendor/phpstan/phpstan-phpunit/extension.neon
+    
+    # Doctrine 扩展
+    # - vendor/phpstan/phpstan-doctrine/extension.neon
+    
+    # 严格规则
+    # - vendor/phpstan/phpstan-strict-rules/rules.neon
+    
+    # 弃用规则
+    # - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+
+# 服务配置
+services:
+    # 自定义错误格式化器
+    # errorFormatter.custom:
+    #     class: App\PHPStan\CustomErrorFormatter
+    
+    # 自定义规则
+    # -
+    #     class: App\PHPStan\CustomRule
+    #     tags:
+    #         - phpstan.rules.rule
+    
+    # 自定义类型指定器
+    # -
+    #     class: App\PHPStan\CustomTypeSpecifier
+    #     tags:
+    #         - phpstan.typeSpecifier.methodTypeSpecifyingExtension
+
+# 条件配置
+conditionalTags:
+    App\PHPStan\CustomRule:
+        phpstan.rules.rule: %customRuleEnabled%
+        
+# 参数
+parametersSchema:
+    customRuleEnabled: bool()
+    
+# 自定义参数
+customParameters:
+    customRuleEnabled: true

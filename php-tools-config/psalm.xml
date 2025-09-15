@@ -1,0 +1,256 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    findUnusedCode="false"
+    findUnusedVariablesAndParams="true"
+    findUnusedPsalmSuppress="true"
+    cacheDirectory="var/cache/psalm"
+    allowPhpStormGenerics="true"
+    allowCoercionFromStringToClassConst="true"
+    allowStringToStandInForClass="true"
+    memoizeMethodCallResults="true"
+    hoistConstants="true"
+    addParamTypehints="true"
+    checkForThrowsDocblock="true"
+    checkForThrowsInGlobalScope="true"
+    ignoreInternalFunctionFalseReturn="false"
+    ignoreInternalFunctionNullReturn="false"
+    includePhpVersionsInErrorBaseline="false"
+    ensureArrayStringOffsetsExist="true"
+    ensureArrayIntOffsetsExist="true"
+    reportMixedIssues="true"
+    strictBinaryOperands="true"
+    rememberPropertyAssignmentsAfterCall="true"
+    serializer="compact"
+    phpVersion="8.1"
+>
+    <!-- 项目文件 -->
+    <projectFiles>
+        <directory name="src" />
+        <directory name="tests" />
+        <directory name="config" />
+        <directory name="database" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <directory name="storage" />
+            <directory name="bootstrap/cache" />
+            <directory name="node_modules" />
+            <file name="tests/bootstrap.php" />
+            <glob pattern="**/*.blade.php" />
+            <glob pattern="**/migrations/*.php" />
+            <glob pattern="**/seeders/*.php" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <!-- 插件 -->
+    <plugins>
+        <!-- Laravel 插件 -->
+        <!-- <pluginClass class="Psalm\LaravelPlugin\Plugin" /> -->
+        
+        <!-- PHPUnit 插件 -->
+        <!-- <pluginClass class="Psalm\PhpUnitPlugin\Plugin" /> -->
+        
+        <!-- Mockery 插件 -->
+        <!-- <pluginClass class="Weirdan\PsalmPluginMockery\Plugin" /> -->
+    </plugins>
+
+    <!-- 问题处理器 -->
+    <issueHandlers>
+        <!-- 缺失返回类型 -->
+        <MissingReturnType errorLevel="error" />
+        
+        <!-- 缺失参数类型 -->
+        <MissingParamType errorLevel="error" />
+        
+        <!-- 缺失属性类型 -->
+        <MissingPropertyType errorLevel="error" />
+        
+        <!-- 缺失闭包返回类型 -->
+        <MissingClosureReturnType errorLevel="error" />
+        
+        <!-- 混合类型 -->
+        <MixedReturnStatement errorLevel="info" />
+        <MixedInferredReturnType errorLevel="info" />
+        <MixedAssignment errorLevel="info" />
+        <MixedArrayAccess errorLevel="info" />
+        <MixedArrayAssignment errorLevel="info" />
+        <MixedArrayOffset errorLevel="info" />
+        <MixedArgument errorLevel="info" />
+        <MixedPropertyAssignment errorLevel="info" />
+        <MixedPropertyFetch errorLevel="info" />
+        <MixedPropertyTypeCoercion errorLevel="info" />
+        <MixedMethodCall errorLevel="info" />
+        <MixedOperand errorLevel="info" />
+        
+        <!-- 可能未定义的变量 -->
+        <PossiblyUndefinedVariable errorLevel="error" />
+        <PossiblyUndefinedArrayOffset errorLevel="error" />
+        <PossiblyUndefinedMethod errorLevel="error" />
+        
+        <!-- 可能为null -->
+        <PossiblyNullReference errorLevel="error" />
+        <PossiblyNullArgument errorLevel="error" />
+        <PossiblyNullArrayAccess errorLevel="error" />
+        <PossiblyNullArrayAssignment errorLevel="error" />
+        <PossiblyNullArrayOffset errorLevel="error" />
+        <PossiblyNullFunctionCall errorLevel="error" />
+        <PossiblyNullIterator errorLevel="error" />
+        <PossiblyNullOperand errorLevel="error" />
+        <PossiblyNullPropertyAssignment errorLevel="error" />
+        <PossiblyNullPropertyFetch errorLevel="error" />
+        
+        <!-- 可能为false -->
+        <PossiblyFalseArgument errorLevel="error" />
+        <PossiblyFalseIterator errorLevel="error" />
+        <PossiblyFalseOperand errorLevel="error" />
+        <PossiblyFalsePropertyAssignment errorLevel="error" />
+        <PossiblyFalseReference errorLevel="error" />
+        
+        <!-- 未使用的代码 -->
+        <UnusedVariable errorLevel="info" />
+        <UnusedParam errorLevel="info" />
+        <UnusedProperty errorLevel="info" />
+        <UnusedMethod errorLevel="info" />
+        <UnusedClass errorLevel="info" />
+        <UnusedClosureParam errorLevel="info" />
+        
+        <!-- 无效的代码 -->
+        <InvalidReturnType errorLevel="error" />
+        <InvalidReturnStatement errorLevel="error" />
+        <InvalidArgument errorLevel="error" />
+        <InvalidArrayAccess errorLevel="error" />
+        <InvalidArrayAssignment errorLevel="error" />
+        <InvalidArrayOffset errorLevel="error" />
+        <InvalidCast errorLevel="error" />
+        <InvalidClone errorLevel="error" />
+        <InvalidFunctionCall errorLevel="error" />
+        <InvalidMethodCall errorLevel="error" />
+        <InvalidOperand errorLevel="error" />
+        <InvalidPropertyAssignment errorLevel="error" />
+        <InvalidPropertyFetch errorLevel="error" />
+        <InvalidScalarArgument errorLevel="error" />
+        <InvalidStringClass errorLevel="error" />
+        <InvalidThrow errorLevel="error" />
+        
+        <!-- 类型强制 -->
+        <TypeCoercion errorLevel="info" />
+        <ArgumentTypeCoercion errorLevel="info" />
+        <PropertyTypeCoercion errorLevel="info" />
+        <ReturnTypeCoercion errorLevel="info" />
+        
+        <!-- 冗余条件 -->
+        <RedundantCondition errorLevel="info" />
+        <RedundantConditionGivenDocblockType errorLevel="info" />
+        <RedundantFunctionCall errorLevel="info" />
+        
+        <!-- 不可达代码 -->
+        <UnreachableCode errorLevel="error" />
+        
+        <!-- 循环问题 -->
+        <LoopInvalidation errorLevel="error" />
+        
+        <!-- 重复键 -->
+        <DuplicateArrayKey errorLevel="error" />
+        
+        <!-- 弃用的功能 -->
+        <DeprecatedMethod errorLevel="info" />
+        <DeprecatedProperty errorLevel="info" />
+        <DeprecatedClass errorLevel="info" />
+        <DeprecatedConstant errorLevel="info" />
+        <DeprecatedFunction errorLevel="info" />
+        <DeprecatedInterface errorLevel="info" />
+        <DeprecatedTrait errorLevel="info" />
+        
+        <!-- 内部错误 -->
+        <InternalMethod errorLevel="error" />
+        <InternalProperty errorLevel="error" />
+        <InternalClass errorLevel="error" />
+        
+        <!-- 抽象实例化 -->
+        <AbstractInstantiation errorLevel="error" />
+        
+        <!-- 未实现的接口方法 -->
+        <UnimplementedInterfaceMethod errorLevel="error" />
+        <UnimplementedAbstractMethod errorLevel="error" />
+        
+        <!-- 特定于测试的问题 -->
+        <MissingFile>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+            </errorLevel>
+        </MissingFile>
+        
+        <!-- Laravel 特定问题 -->
+        <UndefinedMagicMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="Illuminate\Database\Eloquent\Model::factory" />
+                <referencedMethod name="Illuminate\Database\Eloquent\Builder::*" />
+                <referencedMethod name="Illuminate\Database\Query\Builder::*" />
+            </errorLevel>
+        </UndefinedMagicMethod>
+        
+        <UndefinedMagicPropertyFetch>
+            <errorLevel type="suppress">
+                <referencedProperty name="Illuminate\Database\Eloquent\Model::$*" />
+            </errorLevel>
+        </UndefinedMagicPropertyFetch>
+        
+        <!-- 属性初始化 -->
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        
+        <!-- 全局变量 -->
+        <UndefinedGlobalVariable>
+            <errorLevel type="suppress">
+                <file name="config/*.php" />
+            </errorLevel>
+        </UndefinedGlobalVariable>
+        
+        <!-- 字符串类 -->
+        <InvalidStringClass>
+            <errorLevel type="suppress">
+                <directory name="config" />
+                <directory name="database" />
+            </errorLevel>
+        </InvalidStringClass>
+    </issueHandlers>
+
+    <!-- 存根文件 -->
+    <stubs>
+        <file name="stubs/laravel.phpstub" />
+        <file name="stubs/phpunit.phpstub" />
+    </stubs>
+
+    <!-- 全局类型 -->
+    <globals>
+        <var name="app" type="Illuminate\Contracts\Foundation\Application" />
+    </globals>
+
+    <!-- 模拟类 -->
+    <mockClasses>
+        <class name="Mockery\MockInterface" />
+        <class name="PHPUnit\Framework\MockObject\MockObject" />
+    </mockClasses>
+
+    <!-- 禁止的函数 -->
+    <forbiddenFunctions>
+        <function name="var_dump" />
+        <function name="print_r" />
+        <function name="dd" />
+        <function name="dump" />
+        <function name="die" />
+        <function name="exit" />
+        <function name="eval" />
+        <function name="exec" />
+        <function name="shell_exec" />
+        <function name="system" />
+        <function name="passthru" />
+    </forbiddenFunctions>
+</psalm>
