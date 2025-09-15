@@ -1,0 +1,280 @@
+rules:
+  naming:
+    variables: camelCase              # $userName, $totalAmount
+    functions: camelCase              # getUserData(), calculateTotal()
+    methods: camelCase                # public function getData()
+    classes: PascalCase               # UserManager, DatabaseConnection
+    interfaces: PascalCase_Interface  # UserRepositoryInterface
+    traits: PascalCase_Trait          # LoggableTrait
+    constants: UPPER_SNAKE_CASE       # MAX_RETRY_COUNT, API_VERSION
+    namespaces: PascalCase            # App\Services\UserService
+    files: PascalCase                 # UserController.php
+    
+  formatting:
+    php_tags:
+      opening: "<?php"
+      closing: omit_for_php_only_files
+    indentation: 4                    # 4 spaces
+    line_length: 120
+    braces:
+      classes: next_line              # Allman style
+      methods: next_line
+      control_structures: same_line   # K&R style
+    spacing:
+      operators: single_space         # $a = $b + $c
+      after_commas: single_space      # function($a, $b, $c)
+      around_parentheses: no_space    # if ($condition)
+      
+  psr_standards:
+    psr1: true                        # Basic Coding Standard
+    psr2: true                        # Coding Style Guide  
+    psr4: true                        # Autoloader Standard
+    psr12: true                       # Extended Coding Style
+    
+  best_practices:
+    strict_types: declare_always      # declare(strict_types=1)
+    type_declarations: use_always     # function getName(): string
+    return_types: explicit            # public function getId(): int
+    visibility: explicit              # public, private, protected
+    final_classes: when_appropriate   # final class ValueObject
+    immutability: prefer_when_possible
+    null_coalescing: use_operator     # $name = $input['name'] ?? 'default'
+    
+  object_oriented:
+    single_responsibility: true
+    composition_over_inheritance: true
+    dependency_injection: constructor_preferred
+    interfaces: define_contracts
+    abstract_classes: for_shared_behavior
+    traits: for_horizontal_reuse
+    magic_methods: use_sparingly
+    
+  functions_methods:
+    max_lines: 50
+    max_parameters: 5
+    single_responsibility: true
+    pure_functions: prefer_when_possible
+    early_returns: use_for_guards
+    void_return_type: explicit_when_no_return
+    
+  arrays:
+    syntax: short_array_syntax        # [] instead of array()
+    trailing_commas: multiline_arrays
+    associative: explicit_keys_preferred
+    
+  strings:
+    quotes: single_quotes_preferred   # 'text' instead of "text"
+    interpolation: curly_braces       # "Hello {$name}"
+    concatenation: dot_operator       # $full = $first . ' ' . $last
+    heredoc_nowdoc: for_multiline
+    
+  error_handling:
+    exceptions: typed_exceptions
+    try_catch: specific_exceptions
+    finally_blocks: for_cleanup
+    error_reporting: strict_in_dev
+    logging: structured_logging
+    
+  security:
+    input_validation: always
+    output_escaping: context_aware
+    sql_injection: prepared_statements
+    xss_prevention: escape_output
+    csrf_protection: tokens_required
+    password_hashing: password_hash_function
+    file_uploads: validate_and_sanitize
+    
+  database:
+    pdo: preferred_over_mysqli
+    prepared_statements: always
+    transactions: for_related_operations
+    connection_pooling: in_production
+    migrations: version_controlled
+    
+  testing:
+    framework: phpunit
+    coverage: 80_percent_minimum
+    naming: test_should_[behavior]_when_[condition]
+    structure: arrange_act_assert
+    mocking: use_test_doubles
+    integration_tests: for_external_dependencies
+    
+  documentation:
+    phpdoc: required_for_public
+    type_hints: in_docblocks_when_complex
+    examples: for_complex_methods
+    readme: project_setup_instructions
+    
+  performance:
+    opcode_caching: enable_opcache
+    memory_usage: monitor_large_datasets
+    database_queries: minimize_n_plus_1
+    caching: appropriate_levels
+    profiling: xdebug_or_blackfire
+    
+linting:
+  php_cs_fixer:
+    preset: "@PSR12"
+    rules:
+      array_syntax:
+        syntax: short
+      binary_operator_spaces:
+        default: single_space
+      blank_line_after_opening_tag: true
+      braces:
+        allow_single_line_closure: true
+        position_after_functions_and_oop_constructs: next
+      cast_spaces: true
+      class_attributes_separation:
+        elements:
+          method: one
+      concat_space:
+        spacing: one
+      declare_equal_normalize:
+        space: none
+      function_typehint_space: true
+      include: true
+      increment_style:
+        style: post
+      lowercase_cast: true
+      magic_constant_casing: true
+      method_argument_space:
+        on_multiline: ensure_fully_multiline
+      native_function_casing: true
+      no_blank_lines_after_class_opening: true
+      no_blank_lines_after_phpdoc: true
+      no_empty_statement: true
+      no_extra_blank_lines:
+        tokens:
+          - curly_brace_block
+          - extra
+          - parenthesis_brace_block
+          - square_brace_block
+          - throw
+          - use
+      no_leading_import_slash: true
+      no_leading_namespace_whitespace: true
+      no_mixed_echo_print:
+        use: echo
+      no_multiline_whitespace_around_double_arrow: true
+      no_short_bool_cast: true
+      no_singleline_whitespace_before_semicolons: true
+      no_spaces_around_offset:
+        positions: [inside, outside]
+      no_trailing_comma_in_list_call: true
+      no_trailing_comma_in_singleline_array: true
+      no_unneeded_control_parentheses: true
+      no_unused_imports: true
+      no_whitespace_before_comma_in_array: true
+      no_whitespace_in_blank_line: true
+      normalize_index_brace: true
+      object_operator_without_whitespace: true
+      php_unit_fqcn_annotation: true
+      phpdoc_align:
+        align: vertical
+      phpdoc_annotation_without_dot: true
+      phpdoc_indent: true
+      phpdoc_inline_tag: true
+      phpdoc_no_access: true
+      phpdoc_no_alias_tag: true
+      phpdoc_no_empty_return: true
+      phpdoc_no_package: true
+      phpdoc_no_useless_inheritdoc: true
+      phpdoc_return_self_reference: true
+      phpdoc_scalar: true
+      phpdoc_separation: true
+      phpdoc_single_line_var_spacing: true
+      phpdoc_summary: true
+      phpdoc_to_comment: true
+      phpdoc_trim: true
+      phpdoc_types: true
+      phpdoc_var_without_name: true
+      return_type_declaration: true
+      semicolon_after_instruction: true
+      short_scalar_cast: true
+      single_blank_line_before_namespace: true
+      single_class_element_per_statement: true
+      single_line_comment_style:
+        comment_types: [hash]
+      single_quote: true
+      space_after_semicolon:
+        remove_in_empty_for_expressions: true
+      standardize_not_equals: true
+      ternary_operator_spaces: true
+      trailing_comma_in_multiline_array: true
+      trim_array_spaces: true
+      unary_operator_spaces: true
+      whitespace_after_comma_in_array: true
+      
+  phpstan:
+    level: 8                          # Maximum strictness
+    paths:
+      - src
+      - tests
+    excludePaths:
+      - vendor
+    checkMissingIterableValueType: false
+    
+  psalm:
+    level: 1                          # Most strict
+    show_info: true
+    find_dead_code: true
+    
+  phpmd:
+    rulesets:
+      - cleancode
+      - codesize
+      - controversial
+      - design
+      - naming
+      - unusedcode
+    
+frameworks:
+  laravel:
+    naming:
+      models: PascalCase              # User, BlogPost
+      controllers: PascalCase_Controller # UserController
+      migrations: snake_case_with_timestamp
+      routes: kebab-case              # /user-profile
+      views: snake_case               # user_profile.blade.php
+    
+    best_practices:
+      eloquent: use_relationships
+      service_providers: for_bindings
+      middleware: for_cross_cutting_concerns
+      form_requests: for_validation
+      resources: for_api_responses
+      jobs: for_background_tasks
+      
+  symfony:
+    naming:
+      services: camelCase
+      parameters: snake_case
+      routes: snake_case
+      templates: snake_case.html.twig
+      
+    best_practices:
+      dependency_injection: container_configuration
+      event_dispatching: for_decoupling
+      forms: for_user_input
+      security: voters_and_guards
+      
+composer:
+  autoloading: psr4
+  scripts:
+    test: "phpunit"
+    lint: "php-cs-fixer fix --dry-run --diff"
+    fix: "php-cs-fixer fix"
+    analyse: "phpstan analyse"
+    
+git_hooks:
+  pre_commit:
+    - php-cs-fixer fix --dry-run --diff
+    - phpstan analyse
+    - phpunit
+    
+ci_cd:
+  github_actions:
+    php_versions: ["8.1", "8.2", "8.3"]
+    dependencies: ["lowest", "highest"]
+    services: ["mysql", "redis"]
