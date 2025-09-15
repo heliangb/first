@@ -1,0 +1,61 @@
+{
+  "rules": {
+    "naming": {
+      "variables": "camelCase",
+      "functions": "camelCase", 
+      "classes": "PascalCase",
+      "constants": "UPPER_SNAKE_CASE",
+      "files": "kebab-case"
+    },
+    "formatting": {
+      "semicolons": true,
+      "quotes": "single",
+      "indentation": 2,
+      "trailingCommas": true,
+      "maxLineLength": 100
+    },
+    "bestPractices": {
+      "useConstLet": true,
+      "avoidVar": true,
+      "strictMode": true,
+      "asyncAwaitPreferred": true,
+      "destructuringWhenAppropriate": true
+    },
+    "comments": {
+      "jsDocRequired": true,
+      "explainWhyNotWhat": true,
+      "updateWithCode": true
+    },
+    "functions": {
+      "maxLines": 50,
+      "maxParameters": 5,
+      "singleResponsibility": true,
+      "pureWhenPossible": true
+    },
+    "errorHandling": {
+      "explicitErrorTypes": true,
+      "catchSpecificErrors": true,
+      "logErrors": true,
+      "userFriendlyMessages": true
+    }
+  },
+  "linting": {
+    "eslint": {
+      "extends": ["@typescript-eslint/recommended", "prettier"],
+      "rules": {
+        "no-unused-vars": "error",
+        "no-console": "warn",
+        "prefer-const": "error",
+        "no-var": "error",
+        "eqeqeq": "error",
+        "curly": "error"
+      }
+    }
+  },
+  "testing": {
+    "framework": "jest",
+    "coverage": 80,
+    "naming": "describe_should_when",
+    "structure": "arrange_act_assert"
+  }
+}

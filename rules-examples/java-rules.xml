@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codeRules>
+    <naming>
+        <packages>lowercase</packages>
+        <classes>PascalCase</classes>
+        <methods>camelCase</methods>
+        <variables>camelCase</variables>
+        <constants>UPPER_SNAKE_CASE</constants>
+        <interfaces>PascalCase</interfaces>
+    </naming>
+    
+    <formatting>
+        <indentation>4</indentation>
+        <braces>newLine</braces>
+        <lineLength>120</lineLength>
+        <imports>
+            <order>static,java,javax,org,com</order>
+            <groupSeparation>true</groupSeparation>
+        </imports>
+    </formatting>
+    
+    <bestPractices>
+        <accessModifiers>explicit</accessModifiers>
+        <finalForImmutable>true</finalForImmutable>
+        <overrideAnnotation>required</overrideAnnotation>
+        <generics>useWhenAppropriate</generics>
+        <exceptions>
+            <catchSpecific>true</catchSpecific>
+            <finallyBlocks>forCleanup</finallyBlocks>
+        </exceptions>
+    </bestPractices>
+    
+    <classes>
+        <maxMethods>20</maxMethods>
+        <maxLines>300</maxLines>
+        <singleResponsibility>true</singleResponsibility>
+        <composition>preferOverInheritance</composition>
+    </classes>
+    
+    <methods>
+        <maxLines>50</maxLines>
+        <maxParameters>5</maxParameters>
+        <javadoc>requiredForPublic</javadoc>
+        <returnNull>avoid</returnNull>
+    </methods>
+    
+    <testing>
+        <framework>JUnit5</framework>
+        <coverage>80</coverage>
+        <naming>should[ExpectedBehavior]When[StateUnderTest]</naming>
+        <assertions>hamcrest</assertions>
+        <mocking>mockito</mocking>
+    </testing>
+    
+    <linting>
+        <checkstyle>
+            <checks>
+                <check>Indentation</check>
+                <check>LineLength</check>
+                <check>MethodLength</check>
+                <check>ParameterNumber</check>
+                <check>CyclomaticComplexity</check>
+            </checks>
+        </checkstyle>
+        
+        <pmd>
+            <rulesets>
+                <ruleset>category/java/bestpractices.xml</ruleset>
+                <ruleset>category/java/codestyle.xml</ruleset>
+                <ruleset>category/java/design.xml</ruleset>
+                <ruleset>category/java/errorprone.xml</ruleset>
+                <ruleset>category/java/performance.xml</ruleset>
+            </rulesets>
+        </pmd>
+        
+        <spotbugs>
+            <effort>max</effort>
+            <threshold>low</threshold>
+        </spotbugs>
+    </linting>
+    
+    <security>
+        <inputValidation>always</inputValidation>
+        <sqlInjection>preparedStatements</sqlInjection>
+        <serialization>avoid</serialization>
+        <logging>noSensitiveData</logging>
+    </security>
+</codeRules>

@@ -1,0 +1,79 @@
+rules:
+  naming:
+    variables: snake_case
+    functions: snake_case
+    classes: PascalCase
+    constants: UPPER_SNAKE_CASE
+    modules: snake_case
+    
+  formatting:
+    line_length: 88
+    indentation: 4
+    quotes: double
+    trailing_commas: true
+    
+  best_practices:
+    pep8_compliance: true
+    type_hints: required
+    docstrings: required_for_public
+    list_comprehensions: when_readable
+    f_strings: preferred
+    
+  imports:
+    order:
+      - standard_library
+      - third_party  
+      - local_application
+    style: absolute_imports_preferred
+    
+  functions:
+    max_lines: 50
+    max_parameters: 5
+    single_responsibility: true
+    docstring_format: google_style
+    
+  classes:
+    max_methods: 20
+    single_responsibility: true
+    composition_over_inheritance: true
+    
+  error_handling:
+    specific_exceptions: true
+    logging: required
+    context_managers: for_resources
+    
+  testing:
+    framework: pytest
+    coverage: 85
+    naming: test_should_[behavior]_when_[condition]
+    fixtures: use_pytest_fixtures
+    
+linting:
+  flake8:
+    max_line_length: 88
+    ignore:
+      - E203  # whitespace before ':'
+      - W503  # line break before binary operator
+      
+  pylint:
+    disable:
+      - missing-docstring
+    max_line_length: 88
+    
+  black:
+    line_length: 88
+    target_version: [py38, py39, py310]
+    
+  isort:
+    profile: black
+    multi_line_output: 3
+    
+security:
+  bandit: true
+  input_validation: always
+  sql_injection_prevention: use_orm_or_parameterized
+  
+performance:
+  profiling: for_critical_paths
+  memory_usage: monitor_large_datasets
+  caching: appropriate_levels
